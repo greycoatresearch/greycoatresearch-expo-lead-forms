@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>Greycoat Research — Business Enquiry</title>
+  <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/intl-tel-input@23.0.12/build/css/intlTelInput.css">
+</head>
+<body>
+  <div class="wrap">
+    <div class="brand">
+      <div class="mark">G</div>
+      <div class="name">Greycoat Research <span>· Feline Kidney Care</span></div>
+    </div>
+
+    <nav class="toggle">
+      <a href="b2c.html" data-for="b2c">Cat Owner<small>For your cat</small></a>
+      <a href="b2b.html" data-for="b2b">Business<small>Clinics & trade</small></a>
+    </nav>
+
+    <div class="intro">
+      <h1>Partner with Greycoat</h1>
+      <p>For clinics, distributors, and retailers. Tell us about your business and how you'd like to work together.</p>
+    </div>
+
+    <form id="lead-form" novalidate>
+      <div class="field">
+        <label>Name <span class="req">*</span></label>
+        <input type="text" name="name" autocomplete="name" required>
+      </div>
+
+      <div class="field">
+        <label>Company <span class="req">*</span></label>
+        <input type="text" name="company" autocomplete="organization" required>
+      </div>
+
+      <div class="field">
+        <label>Country <span class="req">*</span></label>
+        <select name="country" required>
+          <option value="" disabled selected>Select your country</option>
+        </select>
+      </div>
+
+      <div class="field">
+        <label>Email <span class="req">*</span></label>
+        <input type="email" name="email" autocomplete="email" inputmode="email" required>
+      </div>
+
+      <div class="field">
+        <label>WhatsApp <span class="req">*</span></label>
+        <input type="tel" name="whatsapp" autocomplete="tel">
+        <span class="hint">Pick your country — the dial code fills in automatically.</span>
+      </div>
+
+      <div class="field">
+        <label>Business type</label>
+        <div class="options cols2" data-check="businessType"></div>
+      </div>
+
+      <div class="field">
+        <label>Interested in</label>
+        <div class="options" data-check="interestedIn"></div>
+      </div>
+
+      <div class="field">
+        <label>Estimated monthly volume</label>
+        <div class="options cols2" data-radio="monthlyVolume"></div>
+      </div>
+
+      <div class="field">
+        <label>Would you like to schedule a follow-up meeting?</label>
+        <div class="options cols2" data-radio="followUp"></div>
+      </div>
+
+      <button type="submit" class="submit">Submit enquiry</button>
+      <div class="status" id="status"></div>
+    </form>
+
+    <template id="success-tmpl">
+      <div class="success">
+        <div class="tick">
+          <svg width="30" height="30" viewBox="0 0 24 24" fill="none"><path d="M4 12.5l5 5L20 6.5" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </div>
+        <h2>Thank you</h2>
+        <p>We've received your enquiry and will follow up shortly.</p>
+        <button onclick="location.reload()">Add another</button>
+      </div>
+    </template>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/intl-tel-input@23.0.12/build/js/intlTelInput.min.js"></script>
+  <script src="config.js"></script>
+  <script src="app.js"></script>
+  <script>
+    var RADIO = {
+      monthlyVolume: ['<50 units', '50–100 units', '100–500 units', '500+ units'],
+      followUp: ['Yes', 'No']
+    };
+    var CHECK = {
+      businessType: ['Veterinary Clinic', 'Pet Shop', 'Distributor', 'Breeder', 'Online Store', 'Cat Rescue', '__other__'],
+      interestedIn: ['Retail Sales', 'Distribution', 'Veterinary Use', 'Breeder Program', 'Collaboration']
+    };
+
+    function tick(kind) {
+      return '<span class="box ' + kind + '"><svg width="13" height="13" viewBox="0 0 24 24" fill="none"><path d="M4 12.5l5 5L20 6.5" stroke="white" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></svg></span>';
+    }
+    function renderRadios(group, name) {
+      group.innerHTML = RADIO[name].map(function (v) {
+        return '<label class="opt"><input type="radio" name="' + name + '" value="' + v + '">' +
+          tick('radio') + '<span>' + v + '</span></label>';
+      }).join('');
+    }
+    function renderChecks(group, name) {
+      group.innerHTML = CHECK[name].map(function (v) {
+        if (v === '__other__') {
+          return '<label class="opt"><input type="checkbox" name="' + name + '" value="__other__">' +
+            tick('check') + '<span>Other</span></label>' +
+            '<div class="opt-other"><input type="text" data-other-for="' + name + '" placeholder="Please specify"></div>';
+        }
+        return '<label class="opt"><input type="checkbox" name="' + name + '" value="' + v + '">' +
+          tick('check') + '<span>' + v + '</span></label>';
+      }).join('');
+    }
+
+    Object.keys(RADIO).forEach(function (n) { renderRadios(document.querySelector('[data-radio="' + n + '"]'), n); });
+    Object.keys(CHECK).forEach(function (n) { renderChecks(document.querySelector('[data-check="' + n + '"]'), n); });
+
+    var phoneInput = document.querySelector('input[name="whatsapp"]');
+    var iti = initPhone(phoneInput);
+    var countrySelect = document.querySelector('select[name="country"]');
+    window.intlTelInput.getCountryData().forEach(function (c) {
+      var o = document.createElement('option');
+      o.value = c.name; o.textContent = c.name; o.dataset.iso = c.iso2;
+      countrySelect.appendChild(o);
+    });
+    phoneInput.addEventListener('countrychange', function () {
+      var d = iti.getSelectedCountryData();
+      var opt = countrySelect.querySelector('option[data-iso="' + d.iso2 + '"]');
+      if (opt && !countrySelect.value) countrySelect.value = opt.value;
+    });
+
+    var form = document.getElementById('lead-form');
+    var status = document.getElementById('status');
+    form.addEventListener('submit', function (e) {
+      e.preventDefault();
+      var name = val('name'), company = val('company'), country = val('country'), email = val('email');
+      var phoneOk = iti.isValidNumber();
+      var emailOk = /^[^@]+@[^@]+\.[^@]+$/.test(email);
+
+      markInvalid(document.querySelector('[name=name]'), !name);
+      markInvalid(document.querySelector('[name=company]'), !company);
+      markInvalid(countrySelect, !country);
+      markInvalid(document.querySelector('[name=email]'), !emailOk);
+      markInvalid(phoneInput, !phoneOk);
+
+      if (!name || !company || !country || !emailOk || !phoneOk) {
+        status.textContent = 'Please complete the highlighted fields.';
+        status.className = 'status err';
+        return;
+      }
+
+      submitLead('B2B', {
+        name: name,
+        company: company,
+        country: country,
+        email: email,
+        whatsapp: iti.getNumber(),
+        businessType: checkedValues('businessType'),
+        interestedIn: checkedValues('interestedIn'),
+        monthlyVolume: (document.querySelector('[name=monthlyVolume]:checked') || {}).value || '',
+        followUp: (document.querySelector('[name=followUp]:checked') || {}).value || ''
+      }, e.submitter, status);
+    });
+  </script>
+</body>
+</html>
