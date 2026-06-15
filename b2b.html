@@ -15,7 +15,7 @@
     </div>
 
     <nav class="toggle">
-      <a href="b2c.html" data-for="b2c">Cat Owner<small>For your cat</small></a>
+      <a href="b2c.html" data-for="b2c">Cat Guardian<small>For your cat</small></a>
       <a href="b2b.html" data-for="b2b">Business<small>Clinics & trade</small></a>
     </nav>
 
@@ -37,9 +37,7 @@
 
       <div class="field">
         <label>Country <span class="req">*</span></label>
-        <select name="country" required>
-          <option value="" disabled selected>Select your country</option>
-        </select>
+        <div data-combobox="country"></div>
       </div>
 
       <div class="field">
@@ -128,17 +126,7 @@
 
     var phoneInput = document.querySelector('input[name="whatsapp"]');
     var iti = initPhone(phoneInput);
-    var countrySelect = document.querySelector('select[name="country"]');
-    window.intlTelInput.getCountryData().forEach(function (c) {
-      var o = document.createElement('option');
-      o.value = c.name; o.textContent = c.name; o.dataset.iso = c.iso2;
-      countrySelect.appendChild(o);
-    });
-    phoneInput.addEventListener('countrychange', function () {
-      var d = iti.getSelectedCountryData();
-      var opt = countrySelect.querySelector('option[data-iso="' + d.iso2 + '"]');
-      if (opt && !countrySelect.value) countrySelect.value = opt.value;
-    });
+    var countryField = initCountryField(document.querySelector('[data-combobox="country"]'), iti, phoneInput);
 
     var form = document.getElementById('lead-form');
     var status = document.getElementById('status');
@@ -150,7 +138,7 @@
 
       markInvalid(document.querySelector('[name=name]'), !name);
       markInvalid(document.querySelector('[name=company]'), !company);
-      markInvalid(countrySelect, !country);
+      countryField.setInvalid(!country);
       markInvalid(document.querySelector('[name=email]'), !emailOk);
       markInvalid(phoneInput, !phoneOk);
 

@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-  <title>Greycoat Research — Cat Owner Sign-up</title>
+  <title>Greycoat Research — Cat Guardian Sign-up</title>
   <link rel="stylesheet" href="styles.css">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/intl-tel-input@23.0.12/build/css/intlTelInput.css">
 </head>
@@ -15,7 +15,7 @@
     </div>
 
     <nav class="toggle">
-      <a href="b2c.html" data-for="b2c">Cat Owner<small>For your cat</small></a>
+      <a href="b2c.html" data-for="b2c">Cat Guardian<small>For your cat</small></a>
       <a href="b2b.html" data-for="b2b">Business<small>Clinics & trade</small></a>
     </nav>
 
@@ -43,9 +43,7 @@
 
       <div class="field">
         <label>Country <span class="req">*</span></label>
-        <select name="country" required>
-          <option value="" disabled selected>Select your country</option>
-        </select>
+        <div data-combobox="country"></div>
       </div>
 
       <div class="field">
@@ -138,19 +136,8 @@
     // ---- phone + country (shared source so they stay consistent) ----
     var phoneInput = document.querySelector('input[name="whatsapp"]');
     var iti = initPhone(phoneInput);
-    var countrySelect = document.querySelector('select[name="country"]');
-    // Populate country dropdown from intl-tel-input's data so labels match.
-    window.intlTelInput.getCountryData().forEach(function (c) {
-      var o = document.createElement('option');
-      o.value = c.name; o.textContent = c.name; o.dataset.iso = c.iso2;
-      countrySelect.appendChild(o);
-    });
-    // When phone country changes, sync the country dropdown.
-    phoneInput.addEventListener('countrychange', function () {
-      var d = iti.getSelectedCountryData();
-      var opt = countrySelect.querySelector('option[data-iso="' + d.iso2 + '"]');
-      if (opt && !countrySelect.value) countrySelect.value = opt.value;
-    });
+    // Searchable country combobox, synced to the phone country while still empty.
+    var countryField = initCountryField(document.querySelector('[data-combobox="country"]'), iti, phoneInput);
 
     // ---- submit ----
     var form = document.getElementById('lead-form');
@@ -164,7 +151,7 @@
       markInvalid(document.querySelector('[name=name]'), !name);
       markInvalid(document.querySelector('[name=email]'), !/^[^@]+@[^@]+\.[^@]+$/.test(email));
       markInvalid(phoneInput, !phoneOk);
-      markInvalid(countrySelect, !country);
+      countryField.setInvalid(!country);
 
       if (!name || !/^[^@]+@[^@]+\.[^@]+$/.test(email) || !phoneOk || !country) {
         status.textContent = 'Please complete the highlighted fields.';

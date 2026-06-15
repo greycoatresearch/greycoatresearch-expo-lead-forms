@@ -140,6 +140,94 @@ input:focus, select:focus {
 }
 input.invalid, select.invalid { border-color: var(--danger); }
 
+/* ---- combobox (searchable country select) ---- */
+.combobox { position: relative; }
+.combobox-trigger {
+  width: 100%;
+  min-height: var(--tap);
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 0 14px;
+  border: 1.5px solid var(--line-strong);
+  border-radius: var(--radius);
+  background: var(--card);
+  color: var(--ink);
+  font: inherit;
+  text-align: left;
+  cursor: pointer;
+}
+.combobox-trigger:focus-visible {
+  outline: none;
+  border-color: var(--teal);
+  box-shadow: 0 0 0 3px var(--teal-soft);
+}
+.combobox.invalid .combobox-trigger { border-color: var(--danger); }
+.combobox-value {
+  flex: 1;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.combobox-value.is-placeholder { color: var(--ink-soft); }
+.combobox-caret { flex: none; color: var(--ink-soft); }
+
+.combobox-popover {
+  position: absolute;
+  z-index: 30;
+  top: calc(100% + 6px);
+  left: 0; right: 0;
+  background: var(--card);
+  border: 1.5px solid var(--line-strong);
+  border-radius: var(--radius);
+  box-shadow: 0 12px 32px rgba(28,37,48,.16);
+  overflow: hidden;
+}
+.combobox-search {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 0 14px;
+  border-bottom: 1px solid var(--line);
+  color: var(--ink-soft);
+}
+.combobox-search svg { flex: none; }
+.combobox-search input {
+  flex: 1;
+  min-width: 0;
+  min-height: 46px;
+  padding: 0;
+  border: none;
+  background: none;
+  outline: none;
+  font: inherit;
+  color: var(--ink);
+}
+.combobox-list {
+  list-style: none;
+  margin: 0;
+  padding: 6px;
+  max-height: 252px;
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
+  overscroll-behavior: contain;
+}
+.combobox-option {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  min-height: 42px;
+  padding: 0 10px;
+  border-radius: 9px;
+  cursor: pointer;
+  font-size: 15px;
+}
+.combobox-option > span { flex: 1; }
+.combobox-option.is-active { background: var(--teal-soft); }
+.combobox-check { flex: none; color: var(--teal); opacity: 0; }
+.combobox-option.is-selected .combobox-check { opacity: 1; }
+.combobox-empty { padding: 16px 14px; text-align: center; color: var(--ink-soft); font-size: 14px; }
+
 /* ---- radio / checkbox cards ---- */
 .options { display: grid; gap: 8px; }
 .options.cols2 { grid-template-columns: 1fr 1fr; }
