@@ -20,6 +20,18 @@ const thanks = qs<HTMLElement>("#thanks")!;
 const formError = qs<HTMLElement>("#formError")!;
 const submitBtn = qs<HTMLButtonElement>("#submitBtn")!;
 
+// ---- Warn before leaving with unsaved input (native browser dialog) ----
+let dirty = false;
+let submitted = false;
+form.addEventListener("input", () => (dirty = true));
+form.addEventListener("change", () => (dirty = true));
+window.addEventListener("beforeunload", (e) => {
+  if (dirty && !submitted) {
+    e.preventDefault();
+    e.returnValue = ""; // Chrome requires returnValue to be set
+  }
+});
+
 // Cloudflare Turnstile — rendered hidden; the (usually invisible) check runs on submit.
 initTurnstile("#turnstile-container");
 
@@ -173,6 +185,7 @@ form.addEventListener("submit", async (e) => {
     qs("#thanksTitle")!.textContent = `Thanks${first ? ", " + first : ""}`;
     qs("#thanksText")!.textContent =
       `We've received ${co}'s enquiry. ${meetingLine}Our partnerships team will follow up by email and WhatsApp.`;
+    submitted = true;
     form.hidden = true;
     thanks.hidden = false;
     window.scrollTo(0, 0);
