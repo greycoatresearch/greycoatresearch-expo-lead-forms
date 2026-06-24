@@ -318,7 +318,7 @@
             your vet before starting if your cat is on prescription medication.
           </p>
           <p class="form-error" id="formError" hidden>Please complete the required fields above.</p>
-          <div class="turnstile" id="turnstile"></div>
+          <div class="turnstile" id="turnstile-container"></div>
           <button type="submit" class="submit" id="submitBtn">Submit</button>
         </section>
 
@@ -346,6 +346,9 @@
         <p class="thanks__note">Please hand the phone back to our team.</p>
       </section>
     </main>
-    <script src="https://challenges.cloudflare.com/turnstile/v0/api.js" async defer></script>
+    <script
+      src="https://challenges.cloudflare.com/turnstile/v0/api.js?render=explicit"
+      defer
+    ></script>
   </body>
 </html>

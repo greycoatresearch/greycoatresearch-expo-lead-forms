@@ -27,11 +27,8 @@ interface RenderOptions {
 }
 
 interface TurnstileApi {
-  render(container: string | HTMLElement, opts: RenderOptions): string;
-  execute(widget: string | HTMLElement, opts?: RenderOptions): void;
-  reset(widget?: string | HTMLElement): void;
-  remove(widget?: string | HTMLElement): void;
-  getResponse(widget?: string | HTMLElement): string | undefined;
+  render(container: string, opts: RenderOptions): string;
+  reset(widget?: string): void;
 }
 
 declare global {
@@ -75,9 +72,10 @@ function apiReady(): Promise<void> {
 
 // Renders the (hidden) widget. Safe to call once on page load; no-ops without a
 // configured site key so the form still works in local dev.
-export function initTurnstile(container: HTMLElement): Promise<void> {
+export function initTurnstile(containerSelector: string): Promise<void> {
   if (!TURNSTILE_SITE_KEY) return Promise.resolve();
   if (initPromise) return initPromise;
+  const container = document.querySelector(containerSelector)!;
   const settle = (token: string | null, err?: Error) => {
     container.classList.remove("is-active");
     if (err) {
@@ -92,12 +90,9 @@ export function initTurnstile(container: HTMLElement): Promise<void> {
   };
   initPromise = (async () => {
     await apiReady();
-    widgetId = window.turnstile!.render(container, {
+    widgetId = window.turnstile!.render(containerSelector, {
       sitekey: TURNSTILE_SITE_KEY,
-      action: "turnstile-spin-v1",
       appearance: "interaction-only",
-      execution: "render",
-      "refresh-expired": "auto",
       callback: (token) => settle(token),
       "error-callback": () => settle(null, new Error("Turnstile check failed")),
       "timeout-callback": () => settle(null, new Error("Turnstile timed out")),
@@ -132,8 +127,9 @@ export function getTurnstileToken(): Promise<string> {
       tokenSpent = false;
       window.turnstile?.reset(widgetId);
     }
-    const token = currentToken
-      || (await new Promise<string>((resolve, reject) => {
+    const token =
+      currentToken ||
+      (await new Promise<string>((resolve, reject) => {
         pending = { resolve, reject };
       }));
     tokenSpent = true;

@@ -21,7 +21,7 @@ const formError = qs<HTMLElement>("#formError")!;
 const submitBtn = qs<HTMLButtonElement>("#submitBtn")!;
 
 // Cloudflare Turnstile — rendered hidden; the (usually invisible) check runs on submit.
-initTurnstile(qs<HTMLElement>("#turnstile")!);
+initTurnstile("#turnstile-container");
 
 // ---- Country + linked WhatsApp dial prefix ----
 const country = initCountryField({

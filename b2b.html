@@ -238,7 +238,7 @@
             <input class="input" id="meetingDate" name="meetingDate" type="date" lang="en-SG" />
           </div>
           <p class="form-error" id="formError" hidden>Please complete the required fields above.</p>
-          <div class="turnstile" id="turnstile"></div>
+          <div class="turnstile" id="turnstile-container"></div>
           <button type="submit" class="submit" id="submitBtn" style="margin-top: 22px">
             Submit partnership enquiry
           </button>
@@ -279,6 +279,9 @@
         <p class="thanks__note">Please hand the phone back to our team.</p>
       </section>
     </main>
-    <script src="https://challenges.cloudflare.com/turnstile/v0/api.js" async defer></script>
+    <script
+      src="https://challenges.cloudflare.com/turnstile/v0/api.js?render=explicit"
+      defer
+    ></script>
   </body>
 </html>
