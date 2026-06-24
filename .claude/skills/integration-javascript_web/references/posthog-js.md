@@ -1434,9 +1434,9 @@ Enables event tracking and data persistence (cookies/localStorage) for this Post
 ### Parameters
 
 - **`options?`** (`{
-      captureEventName?: EventName | null | false; /** event name to be used for capturing the opt-in action */
-      captureProperties?: Properties; /** set of properties to be captured along with the opt-in action */
-  }`) - A dictionary of opt-in options.
+    captureEventName?: EventName | null | false; /** event name to be used for capturing the opt-in action */
+    captureProperties?: Properties; /** set of properties to be captured along with the opt-in action */
+}`) - A dictionary of opt-in options.
 
 ### Returns
 
@@ -1630,9 +1630,9 @@ Returns the Replay url for the current session.
 ### Parameters
 
 - **`options?`** (`{
-      withTimestamp?: boolean;
-      timestampLookBack?: number;
-  }`) - Options for the URL.
+    withTimestamp?: boolean;
+    timestampLookBack?: number;
+}`) - Options for the URL.
 
 ### Returns
 
@@ -1696,11 +1696,11 @@ turns session recording on, and updates the config option `disable_session_recor
 ### Parameters
 
 - **`override?`** (`{
-      sampling?: boolean;
-      linked_flag?: boolean;
-      url_trigger?: true;
-      event_trigger?: true;
-  } | true`) - optional boolean to override the default sampling behavior - ensures the next session recording to start will not be skipped by sampling or linked_flag config. `true` is shorthand for sampling: true, linked_flag: true
+    sampling?: boolean;
+    linked_flag?: boolean;
+    url_trigger?: true;
+    event_trigger?: true;
+} | true`) - optional boolean to override the default sampling behavior - ensures the next session recording to start will not be skipped by sampling or linked_flag config. `true` is shorthand for sampling: true, linked_flag: true
 
 ### Returns
 
@@ -2066,8 +2066,8 @@ Set override group properties for feature flags. This is used when dealing with 
 ### Parameters
 
 - **`properties`** (`{
-      [type: string]: Properties;
-  }`) - The properties to override, the key of which is the group type.
+    [type: string]: Properties;
+}`) - The properties to override, the key of which is the group type.
 - **`reloadFeatureFlags?`** (`boolean`) - Whether to reload feature flags.
 
 ### Returns
@@ -2177,8 +2177,8 @@ This is useful when you have feature flag values from an external source (e.g., 
 - **`flags`** (`Record<string, boolean | string>`) - An object mapping flag keys to their values (boolean or string variant)
 - **`payloads?`** (`Record<string, JsonType>`) - Optional object mapping flag keys to their JSON payloads
 - **`options?`** (`{
-      merge?: boolean;
-  }`) - Optional settings. Use `{ merge: true }` to merge with existing flags instead of replacing.
+    merge?: boolean;
+}`) - Optional settings. Use `{ merge: true }` to merge with existing flags instead of replacing.
 
 ### Returns
 
