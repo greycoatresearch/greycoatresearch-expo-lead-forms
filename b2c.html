@@ -6,6 +6,7 @@
     <meta name="robots" content="noindex, nofollow" />
     <title>Greycoat Research — Kidney care for your cat</title>
     <link rel="icon" type="image/jpeg" href="/favicon.jpg" />
+    <link rel="preconnect" href="https://challenges.cloudflare.com" />
     <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -317,6 +318,7 @@
             your vet before starting if your cat is on prescription medication.
           </p>
           <p class="form-error" id="formError" hidden>Please complete the required fields above.</p>
+          <div class="turnstile" id="turnstile"></div>
           <button type="submit" class="submit" id="submitBtn">Submit</button>
         </section>
 
@@ -344,5 +346,6 @@
         <p class="thanks__note">Please hand the phone back to our team.</p>
       </section>
     </main>
+    <script src="https://challenges.cloudflare.com/turnstile/v0/api.js" async defer></script>
   </body>
 </html>

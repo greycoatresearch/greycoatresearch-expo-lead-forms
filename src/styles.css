@@ -568,6 +568,16 @@ input[type="date"].input::-webkit-calendar-picker-indicator {
   text-align: center;
 }
 
+/* Turnstile lives here but stays invisible unless an interactive challenge is
+   genuinely needed; .is-active (toggled in turnstile.ts) reserves space only then. */
+.turnstile {
+  display: flex;
+  justify-content: center;
+}
+.turnstile.is-active {
+  margin: 4px 0 18px;
+}
+
 .footer {
   margin-top: 8px;
   text-align: center;

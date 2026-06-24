@@ -13,11 +13,15 @@ import {
   validInput,
   withOther,
 } from "../form-kit";
+import { getTurnstileToken, initTurnstile } from "../turnstile";
 
 const form = qs<HTMLFormElement>("#form")!;
 const thanks = qs<HTMLElement>("#thanks")!;
 const formError = qs<HTMLElement>("#formError")!;
 const submitBtn = qs<HTMLButtonElement>("#submitBtn")!;
+
+// Cloudflare Turnstile — rendered hidden; the (usually invisible) check runs on submit.
+initTurnstile(qs<HTMLElement>("#turnstile")!);
 
 // ---- Country + linked WhatsApp dial prefix ----
 const country = initCountryField({
@@ -148,7 +152,8 @@ form.addEventListener("submit", async (e) => {
   submitBtn.disabled = true;
   submitBtn.textContent = "Submitting…";
   try {
-    await submitLead("B2B", payload);
+    const turnstileToken = await getTurnstileToken();
+    await submitLead("B2B", { ...payload, turnstileToken });
     posthog.identify(email.value.trim(), {
       email: email.value.trim(),
       name: name.value.trim(),

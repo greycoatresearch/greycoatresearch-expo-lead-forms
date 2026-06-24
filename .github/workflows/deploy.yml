@@ -32,6 +32,7 @@ jobs:
       - name: Build
         env:
           VITE_PUBLIC_POSTHOG_KEY: ${{ vars.VITE_PUBLIC_POSTHOG_KEY }}
+          VITE_PUBLIC_TURNSTILE_SITE_KEY: ${{ vars.VITE_PUBLIC_TURNSTILE_SITE_KEY }}
         run: bun run build
 
       - name: Upload Pages artifact
