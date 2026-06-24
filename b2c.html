@@ -1,177 +1,348 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-<head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-  <title>Greycoat Research — Cat Guardian Sign-up</title>
-  <link rel="stylesheet" href="styles.css">
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/intl-tel-input@23.0.12/build/css/intlTelInput.css">
-</head>
-<body>
-  <div class="wrap">
-    <div class="brand">
-      <div class="mark">G</div>
-      <div class="name">Greycoat Research <span>· Feline Kidney Care</span></div>
-    </div>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+    <meta name="robots" content="noindex, nofollow" />
+    <title>Greycoat Research — Kidney care for your cat</title>
+    <link rel="icon" type="image/jpeg" href="/favicon.jpg" />
+    <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Tinos:wght@700&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      as="style"
+      crossorigin
+      href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-std-dynamic-subset.min.css"
+    />
+    <script type="module" src="/src/entries/b2c.ts"></script>
+  </head>
+  <body>
+    <main class="page">
+      <!-- ===== Form ===== -->
+      <form id="form" novalidate>
+        <!-- Hero -->
+        <header class="hero">
+          <img class="hero__logo" src="/assets/logo.svg" alt="Greycoat Research" />
+          <h1 class="hero__title">Kidney care for<br /><span class="accent">your cat</span></h1>
+          <p class="hero__sub">
+            Tell us about your cat and we'll send guidance grounded in Dr. Toru Miyazaki's AIM
+            research.
+          </p>
+        </header>
 
-    <nav class="toggle">
-      <a href="b2c.html" data-for="b2c">Cat Guardian<small>For your cat</small></a>
-      <a href="b2b.html" data-for="b2b">Business<small>Clinics & trade</small></a>
-    </nav>
+        <!-- 1 · Your details -->
+        <section class="section">
+          <div class="section__head">
+            <span class="badge" data-badge="1">1</span
+            ><span class="section__label">Your details</span>
+          </div>
 
-    <div class="intro">
-      <h1>Kidney care for your cat</h1>
-      <p>Tell us about your cat and we'll send guidance grounded in Dr.&nbsp;Toru Miyazaki's AIM research.</p>
-    </div>
+          <div class="field">
+            <label class="field__label" for="name">Name <span class="req">*</span></label>
+            <div class="input-wrap" data-check>
+              <input
+                class="input"
+                id="name"
+                name="name"
+                type="text"
+                autocomplete="name"
+                placeholder="Your full name"
+                required
+              />
+              <span class="input-check" aria-hidden="true"
+                ><svg width="15" height="15" viewBox="0 0 14 14" fill="none">
+                  <path
+                    d="M2.5 7.5l3 3 6-7"
+                    stroke="currentColor"
+                    stroke-width="2.2"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  /></svg
+              ></span>
+            </div>
+          </div>
 
-    <form id="lead-form" novalidate>
-      <div class="field">
-        <label>Name <span class="req">*</span></label>
-        <input type="text" name="name" autocomplete="name" required>
-      </div>
+          <div class="field">
+            <label class="field__label" for="email">Email <span class="req">*</span></label>
+            <div class="input-wrap" data-check>
+              <input
+                class="input"
+                id="email"
+                name="email"
+                type="email"
+                inputmode="email"
+                autocomplete="email"
+                placeholder="you@example.com"
+                required
+              />
+              <span class="input-check" aria-hidden="true"
+                ><svg width="15" height="15" viewBox="0 0 14 14" fill="none">
+                  <path
+                    d="M2.5 7.5l3 3 6-7"
+                    stroke="currentColor"
+                    stroke-width="2.2"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  /></svg
+              ></span>
+            </div>
+          </div>
 
-      <div class="field">
-        <label>Email <span class="req">*</span></label>
-        <input type="email" name="email" autocomplete="email" inputmode="email" required>
-      </div>
+          <!-- Country (searchable; drives the WhatsApp dial code) -->
+          <div class="field">
+            <label class="field__label" for="country">Country <span class="req">*</span></label>
+            <select id="country" name="country" required aria-label="Country"></select>
+          </div>
 
-      <div class="field">
-        <label>WhatsApp number <span class="req">*</span></label>
-        <input type="tel" name="whatsapp" autocomplete="tel">
-        <span class="hint">Pick your country — the dial code fills in automatically.</span>
-      </div>
+          <!-- WhatsApp (optional). Dial code is linked to the country above. -->
+          <div class="field">
+            <label class="field__label" for="phone"
+              >WhatsApp Number <span class="opt">· Optional</span></label
+            >
+            <div class="phone-row">
+              <span class="dial-prefix" id="dial-prefix">+65</span>
+              <input
+                class="input"
+                id="phone"
+                name="phone"
+                type="tel"
+                inputmode="tel"
+                autocomplete="tel"
+                placeholder="9123 4567"
+              />
+            </div>
+          </div>
+        </section>
 
-      <div class="field">
-        <label>Country <span class="req">*</span></label>
-        <div data-combobox="country"></div>
-      </div>
+        <!-- 2 · Your cat -->
+        <section class="section">
+          <div class="section__head">
+            <span class="badge" data-badge="2">2</span><span class="section__label">Your cat</span>
+          </div>
+          <div class="field">
+            <label class="field__label" for="catName">Cat's Name <span class="req">*</span></label>
+            <div class="input-wrap" data-check>
+              <input
+                class="input"
+                id="catName"
+                name="catName"
+                type="text"
+                placeholder="e.g. Mochi"
+                required
+              />
+              <span class="input-check" aria-hidden="true"
+                ><svg width="15" height="15" viewBox="0 0 14 14" fill="none">
+                  <path
+                    d="M2.5 7.5l3 3 6-7"
+                    stroke="currentColor"
+                    stroke-width="2.2"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  /></svg
+              ></span>
+            </div>
+          </div>
+          <div class="field">
+            <label class="field__label" for="catAge">Cat's Age <span class="req">*</span></label>
+            <div class="input-wrap" data-check>
+              <input
+                class="input"
+                id="catAge"
+                name="catAge"
+                type="text"
+                inputmode="numeric"
+                placeholder="e.g. 9 years"
+                required
+              />
+              <span class="input-check" aria-hidden="true"
+                ><svg width="15" height="15" viewBox="0 0 14 14" fill="none">
+                  <path
+                    d="M2.5 7.5l3 3 6-7"
+                    stroke="currentColor"
+                    stroke-width="2.2"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  /></svg
+              ></span>
+            </div>
+          </div>
+        </section>
 
-      <div class="field">
-        <label>Cat's name</label>
-        <input type="text" name="catName">
-      </div>
+        <!-- 3 · Kidney health -->
+        <section class="section">
+          <div class="section__head">
+            <span class="badge" data-badge="3">3</span
+            ><span class="section__label">Kidney health</span>
+          </div>
+          <div class="field">
+            <label class="field__label"
+              >Has your cat been diagnosed with kidney disease? <span class="req">*</span></label
+            >
+            <div
+              class="pills"
+              data-group="diagnosed"
+              data-mode="single"
+              data-options="Yes|No|Not sure"
+            ></div>
+            <p class="field__error" data-error="diagnosed" hidden>Please choose one</p>
+          </div>
+          <!-- Shown only when "diagnosed with kidney disease?" is answered "Yes". -->
+          <div class="field" id="stageField" hidden>
+            <label class="field__label">What stage is your cat? <span class="req">*</span></label>
+            <div
+              class="pills"
+              data-group="stage"
+              data-mode="single"
+              data-options="Stage 1|Stage 2|Stage 3|Stage 4|Not sure"
+            ></div>
+            <p class="field__error" data-error="stage" hidden>Please choose one</p>
+          </div>
+        </section>
 
-      <div class="field">
-        <label>Cat's age</label>
-        <input type="text" name="catAge" inputmode="numeric" placeholder="e.g. 8 years">
-      </div>
+        <!-- 4 · Current support (optional, multi) -->
+        <section class="section">
+          <div class="section__head">
+            <span class="badge" data-badge-static>4</span
+            ><span class="section__label">Current support</span>
+          </div>
+          <label class="field__label">Are you currently using any kidney support products?</label>
+          <p class="help-text">Select all that apply.</p>
+          <div
+            class="pills"
+            data-group="products"
+            data-mode="multi"
+            data-exclusive="None"
+            data-options="Greycoat Dr. Toru|Renal Diet|Porus One|Azodyl|AminAvast|Other|None"
+          ></div>
+          <input
+            class="input other-input"
+            id="productOther"
+            name="productOther"
+            type="text"
+            placeholder="Which other product?"
+            hidden
+          />
+        </section>
 
-      <div class="field">
-        <label>Has your cat been diagnosed with kidney disease?</label>
-        <div class="options" data-radio="diagnosed">
-          <!-- options injected -->
+        <!-- 5 · What you'd like to receive (optional, multi) -->
+        <section class="section">
+          <div class="section__head">
+            <span class="badge" data-badge-static>5</span
+            ><span class="section__label">What you'd like to receive</span>
+          </div>
+          <p class="help-text">Select all that apply.</p>
+          <div
+            class="pills"
+            data-group="interests"
+            data-mode="multi"
+            data-options="Kidney care guide|Product updates|Clinical case updates|Other"
+          ></div>
+          <input
+            class="input other-input"
+            id="interestsOther"
+            name="interestsOther"
+            type="text"
+            placeholder="What else would you like to receive?"
+            hidden
+          />
+        </section>
+
+        <!-- 6 · Anything else (optional) -->
+        <section class="section">
+          <div class="section__head">
+            <span class="badge" data-badge-static>6</span
+            ><span class="section__label">Anything else?</span>
+          </div>
+          <label class="field__label" for="message"
+            >Questions or anything you'd like us to know</label
+          >
+          <textarea
+            class="input textarea"
+            id="message"
+            name="message"
+            rows="4"
+            placeholder="Tell us anything else about your cat or what you're looking for…"
+          ></textarea>
+        </section>
+
+        <!-- 7 · How did you hear about us (optional, single) -->
+        <section class="section">
+          <div class="section__head">
+            <span class="badge" data-badge-static>7</span
+            ><span class="section__label">How did you hear about us?</span>
+          </div>
+          <div
+            class="pills"
+            data-group="source"
+            data-mode="single"
+            data-options="Asia Cat Expo|Facebook|Instagram|Veterinarian|Friend|Pet Shop|Other"
+          ></div>
+          <input
+            class="input other-input"
+            id="sourceOther"
+            name="sourceOther"
+            type="text"
+            placeholder="How did you hear about us?"
+            hidden
+          />
+        </section>
+
+        <!-- Consent + submit -->
+        <section class="section">
+          <label class="consent">
+            <input class="consent__input" type="checkbox" id="consent" name="consent" required />
+            <span class="consent__box"
+              ><svg width="13" height="13" viewBox="0 0 14 14" fill="none">
+                <path
+                  d="M2.5 7.5l3 3 6-7"
+                  stroke="#fff"
+                  stroke-width="2.2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                /></svg
+            ></span>
+            <span class="consent__text"
+              >I agree to receive communications from Greycoat Research regarding kidney wellness
+              information, product updates, and educational materials.
+              <span class="req">*</span></span
+            >
+          </label>
+          <p class="fineprint">
+            This is a nutritional supplement, not a substitute for veterinary care. Please consult
+            your vet before starting if your cat is on prescription medication.
+          </p>
+          <p class="form-error" id="formError" hidden>Please complete the required fields above.</p>
+          <button type="submit" class="submit" id="submitBtn">Submit</button>
+        </section>
+
+        <div class="footer">greycoatresearch.com</div>
+      </form>
+
+      <!-- ===== Thank-you (shown after submit) ===== -->
+      <section class="thanks" id="thanks" hidden>
+        <div class="thanks__icon">
+          <svg width="34" height="34" viewBox="0 0 32 32" fill="none">
+            <path
+              d="M7 16.5l6 6 12-13"
+              stroke="currentColor"
+              stroke-width="3"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            />
+          </svg>
         </div>
-      </div>
-
-      <div class="field">
-        <label>What stage is your cat?</label>
-        <div class="options" data-radio="stage"></div>
-      </div>
-
-      <div class="field">
-        <label>Are you currently using any kidney support products?</label>
-        <div class="options" data-check="currentProducts"></div>
-      </div>
-
-      <div class="field">
-        <label>Would you like to receive:</label>
-        <div class="options" data-check="interests"></div>
-      </div>
-
-      <button type="submit" class="submit">Sign up</button>
-      <div class="status" id="status"></div>
-    </form>
-
-    <template id="success-tmpl">
-      <div class="success">
-        <div class="tick">
-          <svg width="30" height="30" viewBox="0 0 24 24" fill="none"><path d="M4 12.5l5 5L20 6.5" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
-        </div>
-        <h2>You're in</h2>
-        <p>Thanks — we'll be in touch about your cat's kidney care.</p>
-        <button onclick="location.reload()">Add another</button>
-      </div>
-    </template>
-  </div>
-
-  <script src="https://cdn.jsdelivr.net/npm/intl-tel-input@23.0.12/build/js/intlTelInput.min.js"></script>
-  <script src="config.js"></script>
-  <script src="app.js"></script>
-  <script>
-    // ---- option definitions ----
-    var RADIO = {
-      diagnosed: ['Yes', 'No', 'Not sure'],
-      stage: ['Stage 1', 'Stage 2', 'Stage 3', 'Stage 4', 'Not diagnosed']
-    };
-    var CHECK = {
-      currentProducts: ['Dr. Toru Protocol', 'Renal Diet', 'Porus One', 'Azodyl', 'AminAvast', '__other__', 'None'],
-      interests: ['Kidney care guide', 'Product updates', 'Clinical case updates']
-    };
-    var LABELS = { '__other__': 'Others' };
-
-    function tick(kind) {
-      return '<span class="box ' + kind + '"><svg width="13" height="13" viewBox="0 0 24 24" fill="none"><path d="M4 12.5l5 5L20 6.5" stroke="white" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></svg></span>';
-    }
-    function renderRadios(group, name) {
-      group.innerHTML = RADIO[name].map(function (v) {
-        return '<label class="opt"><input type="radio" name="' + name + '" value="' + v + '">' +
-          tick('radio') + '<span>' + v + '</span></label>';
-      }).join('');
-    }
-    function renderChecks(group, name) {
-      group.innerHTML = CHECK[name].map(function (v) {
-        if (v === '__other__') {
-          return '<label class="opt"><input type="checkbox" name="' + name + '" value="__other__">' +
-            tick('check') + '<span>Others</span></label>' +
-            '<div class="opt-other"><input type="text" data-other-for="' + name + '" placeholder="Please specify"></div>';
-        }
-        return '<label class="opt"><input type="checkbox" name="' + name + '" value="' + v + '">' +
-          tick('check') + '<span>' + (LABELS[v] || v) + '</span></label>';
-      }).join('');
-    }
-
-    Object.keys(RADIO).forEach(function (n) { renderRadios(document.querySelector('[data-radio="' + n + '"]'), n); });
-    Object.keys(CHECK).forEach(function (n) { renderChecks(document.querySelector('[data-check="' + n + '"]'), n); });
-
-    // ---- phone + country (shared source so they stay consistent) ----
-    var phoneInput = document.querySelector('input[name="whatsapp"]');
-    var iti = initPhone(phoneInput);
-    // Searchable country combobox, synced to the phone country while still empty.
-    var countryField = initCountryField(document.querySelector('[data-combobox="country"]'), iti, phoneInput);
-
-    // ---- submit ----
-    var form = document.getElementById('lead-form');
-    var status = document.getElementById('status');
-    form.addEventListener('submit', function (e) {
-      e.preventDefault();
-      var name = val('name'), email = val('email'), country = val('country');
-      var phoneOk = iti.isValidNumber();
-
-      var nameEl = form.name_, emailEl = document.querySelector('[name=email]');
-      markInvalid(document.querySelector('[name=name]'), !name);
-      markInvalid(document.querySelector('[name=email]'), !/^[^@]+@[^@]+\.[^@]+$/.test(email));
-      markInvalid(phoneInput, !phoneOk);
-      countryField.setInvalid(!country);
-
-      if (!name || !/^[^@]+@[^@]+\.[^@]+$/.test(email) || !phoneOk || !country) {
-        status.textContent = 'Please complete the highlighted fields.';
-        status.className = 'status err';
-        return;
-      }
-
-      submitLead('B2C', {
-        name: name,
-        email: email,
-        whatsapp: iti.getNumber(),       // E.164, includes country code
-        country: country,
-        catName: val('catName'),
-        catAge: val('catAge'),
-        diagnosed: (document.querySelector('[name=diagnosed]:checked') || {}).value || '',
-        stage: (document.querySelector('[name=stage]:checked') || {}).value || '',
-        currentProducts: checkedValues('currentProducts'),
-        interests: checkedValues('interests')
-      }, e.submitter, status);
-    });
-  </script>
-</body>
+        <h2 class="thanks__title">You're all set</h2>
+        <p class="thanks__text" id="thanksText">
+          Thanks. We've saved your details and our team will follow up.
+        </p>
+        <button type="button" class="thanks__btn" id="again">Start a new form</button>
+        <p class="thanks__note">Please hand the phone back to our team.</p>
+      </section>
+    </main>
+  </body>
 </html>

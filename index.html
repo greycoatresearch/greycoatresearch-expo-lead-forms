@@ -1,36 +1,126 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-<head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-  <title>Greycoat Research — Sign up</title>
-  <link rel="stylesheet" href="styles.css">
-  <style>
-    .choose { display: grid; gap: 14px; margin-top: 8px; }
-    .choose a {
-      display: block; text-decoration: none; color: var(--ink);
-      border: 1.5px solid var(--line-strong); border-radius: var(--radius);
-      background: var(--card); padding: 22px;
-    }
-    .choose a:hover { border-color: var(--teal); }
-    .choose h3 { font-family: 'Fraunces', serif; margin: 0 0 4px; font-size: 19px; }
-    .choose p { margin: 0; color: var(--ink-soft); font-size: 14px; }
-  </style>
-</head>
-<body>
-  <div class="wrap">
-    <div class="brand">
-      <div class="mark">G</div>
-      <div class="name">Greycoat Research <span>· Feline Kidney Care</span></div>
-    </div>
-    <div class="intro">
-      <h1>Welcome</h1>
-      <p>Which best describes you?</p>
-    </div>
-    <div class="choose">
-      <a href="b2c.html"><h3>I'm a cat guardian →</h3><p>Get kidney care guidance for your cat.</p></a>
-      <a href="b2b.html"><h3>I represent a business →</h3><p>Clinics, distributors, retailers, and partners.</p></a>
-    </div>
-  </div>
-</body>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+    <meta name="robots" content="noindex, nofollow" />
+    <title>Greycoat Research — Kidney care for cats</title>
+    <link rel="icon" type="image/jpeg" href="/favicon.jpg" />
+    <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Tinos:wght@700&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      as="style"
+      crossorigin
+      href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-std-dynamic-subset.min.css"
+    />
+    <script type="module" src="/src/entries/landing.ts"></script>
+  </head>
+  <body>
+    <main class="page page--landing">
+      <header class="hero">
+        <img class="hero__logo" src="/assets/logo.svg" alt="Greycoat Research" />
+        <div class="hero__eyebrow">Singapore Pet Expo 2026 · Booth B-12</div>
+        <h1 class="hero__title">
+          <span class="accent">Better days</span> for cats<br />with kidney disease
+        </h1>
+        <p class="hero__sub">Supporting lifelong kidney wellness for cats.</p>
+      </header>
+
+      <div class="lp-prompt">How can we help you?</div>
+
+      <!-- Cat guardians → B2C -->
+      <a class="lp-tile lp-tile--primary" href="/b2c.html">
+        <span class="lp-tile__icon lp-tile__icon--c2">
+          <svg
+            width="26"
+            height="26"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="1.75"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          >
+            <circle cx="11" cy="4" r="2" />
+            <circle cx="18" cy="8" r="2" />
+            <circle cx="20" cy="16" r="2" />
+            <path
+              d="M9 10a5 5 0 0 1 5 5v3.5a3.5 3.5 0 0 1-6.84 1.045Q6.52 17.48 4.46 16.84A3.5 3.5 0 0 1 5.5 10Z"
+            />
+          </svg>
+        </span>
+        <div class="lp-tile__body">
+          <div class="lp-tile__eyebrow">Cat Guardian</div>
+          <h2 class="lp-tile__title">For your cat</h2>
+          <p class="lp-tile__desc">Get a personalized kidney-care plan and our care guide.</p>
+        </div>
+        <svg
+          class="lp-tile__chev"
+          width="20"
+          height="20"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="2"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+        >
+          <path d="M9 18l6-6-6-6" />
+        </svg>
+      </a>
+
+      <!-- Business → B2B -->
+      <a class="lp-tile lp-tile--secondary" href="/b2b.html">
+        <span class="lp-tile__icon lp-tile__icon--b2">
+          <svg
+            width="26"
+            height="26"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="1.75"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          >
+            <path d="M16 20V4a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16" />
+            <rect x="2" y="7" width="20" height="14" rx="2" />
+          </svg>
+        </span>
+        <div class="lp-tile__body">
+          <div class="lp-tile__eyebrow">Business &amp; Trade</div>
+          <h2 class="lp-tile__title">Partner with us</h2>
+          <p class="lp-tile__desc">Stock Greycoat Dr. Toru or explore distribution.</p>
+        </div>
+        <svg
+          class="lp-tile__chev"
+          width="20"
+          height="20"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="2"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+        >
+          <path d="M9 18l6-6-6-6" />
+        </svg>
+      </a>
+
+      <div class="lp-bottom">
+        <div class="lp-fine">
+          <p>
+            This is a nutritional supplement, not a substitute for veterinary care. Talk to your vet
+            before starting if your cat is on prescription medication.
+          </p>
+        </div>
+        <div class="footer">greycoatresearch.com</div>
+      </div>
+    </main>
+  </body>
 </html>
