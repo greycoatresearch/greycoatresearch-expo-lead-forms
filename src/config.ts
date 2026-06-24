@@ -2,7 +2,7 @@
 // (/exec) endpoint backing the booth's Google Sheet. It is a public client-side
 // URL (not a secret).
 export const GREYCOAT_ENDPOINT =
-  "https://script.google.com/macros/s/AKfycbzU3qHkXBpPDPVXV7MeKtlcFjdoCmxr0ZNeVRLMqFHzti942BM5-xXrEsYqiXPnFLLYZw/exec";
+  "https://script.google.com/macros/s/AKfycbxvbWaXqohJWo3gqbMGxKmrQ7f_PBls4h-BqyagIlCuWrWThnp2da7naOk10YWn3rc-iA/exec";
 
 // Cloudflare Turnstile public site key (not a secret). The widget is configured
 // to stay invisible for genuine visitors (see turnstile.ts); the token rides with
