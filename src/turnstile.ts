@@ -47,17 +47,21 @@ let currentToken = "";
 let tokenSpent = false;
 let pending: { resolve: (t: string) => void; reject: (e: Error) => void } | null = null;
 
-// The api.js is loaded by a <script> tag in the page; we just wait for the global
-// to appear. Polling is Cloudflare's documented fallback when the script has no
-// ?onload= callback. Times out so a missing/blocked script rejects (surfacing as
-// a submit error) rather than hanging the submit forever.
+// The api.js is loaded by the <script> tag in the page; we wait until the API is
+// actually usable. Cloudflare sets window.turnstile slightly BEFORE attaching
+// render(), so we poll for the method itself, not just the object's existence
+// (polling the object caused "render is not a function"). This is Cloudflare's
+// documented fallback when the script has no ?onload= callback. Times out so a
+// missing/blocked script rejects (surfacing as a submit error) rather than
+// hanging the submit forever.
 function apiReady(): Promise<void> {
   if (scriptReady) return scriptReady;
   scriptReady = new Promise<void>((resolve, reject) => {
-    if (window.turnstile) return resolve();
+    const ready = () => typeof window.turnstile?.render === "function";
+    if (ready()) return resolve();
     let waited = 0;
     const iv = setInterval(() => {
-      if (window.turnstile) {
+      if (ready()) {
         clearInterval(iv);
         resolve();
       } else if ((waited += 50) >= 10000) {
